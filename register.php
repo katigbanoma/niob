@@ -8,6 +8,13 @@
                         <div class="post">
                             <div class="post-title"><h2><a href="#">Please Enter your personal details</a></h2></div>
                             <div>
+                            <?php 
+                                if (!$_SESSION['registered']) {
+                                    
+                                }else{
+                                    echo $_SESSION['registered'];
+                                }
+                            ?>
                                 <form action="process.php" id="member_reg_form" name="member_reg_form" class="contact-form" role="form" method="post">
                                     <div class="row">
                                         <div class="col-md-12">

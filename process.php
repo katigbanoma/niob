@@ -1,6 +1,6 @@
     <?php
-      require('dbconnect.php');
-      // If the values are posted, insert them into the database.
+        session_start();
+        require('dbconnect.php');
       if (isset($_POST['surname']) && isset($_POST['other_names']) && isset($_POST['member_title']) && isset($_POST['gender'])
             && isset($_POST['dob']) && isset($_POST['religion']) && isset($_POST['phone']) && isset($_POST['email']) && isset($_POST['address'])
             && isset($_POST['niob_admission_date']) && isset($_POST['niob_membership_grade']) && isset($_POST['reg_no']) && isset($_POST['membership_no'])
@@ -41,12 +41,13 @@
            )";
           $result = mysqli_query($connection, $query);
           if($result){
-              $smsg = "User Created Successfully.";
+              echo "<script>alert('User Registered Successfully!'); location.href='index.php';</script>";
+              //$smsg = "User Created Successfully.";
+              //$_SESSION["registered"] = "User Created Successfully";
+              //header('Location: ' . $_SERVER['HTTP_REFERER']);
           }else{
               $fmsg ="User Registration Failed";
+              $_SESSION["not_registered"] = "User Registration Failed";
           }
       }
-    ?>
-
-        <?php if(isset($smsg)){ ?><div class="alert alert-success" role="alert"> <?php echo $smsg; ?> </div><?php } ?>
-        <?php if(isset($fmsg)){ ?><div class="alert alert-danger" role="alert"> <?php echo $fmsg; ?> </div><?php } ?>
+     ?>
