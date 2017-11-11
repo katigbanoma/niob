@@ -41,7 +41,7 @@
            )";
           $result = mysqli_query($connection, $query);
           if($result){
-              echo "<script>alert('User Registered Successfully!'); location.href='index.php';</script>";
+              echo "<script>alert('User Registered Successfully!'); location.href='payments.php';</script>";
               //$smsg = "User Created Successfully.";
               //$_SESSION["registered"] = "User Created Successfully";
               //header('Location: ' . $_SERVER['HTTP_REFERER']);
