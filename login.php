@@ -8,7 +8,7 @@
                         <div class="post">
                             <div class="post-title"><h2>Please Enter your login details [New member? Click <a href="#" onclick="showUser('register.php', this.value)">here</a>]</h2></div>
                             <div>
-                                <form action="#" id="member_login_form" name="member_login_form" style="contact-form"  method="post">
+                                <form action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF']); ?>" id="member_login_form" name="member_login_form" style="contact-form"  method="post">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <input type="text" class="form-control" name="username" id="username" placeholder="Member's Login Username">
@@ -22,6 +22,11 @@
                                         </div>
                                     </div> 
                                 </form>
+                                <?php
+                                    $username = $_POST['username'];
+                                    $mem_password  = $_POST['mem_password'];
+                                    $login = $_POST['login_member'];
+                                ?>
                             </div>
                         </div>
                     </div>
