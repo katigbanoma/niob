@@ -16,11 +16,6 @@
 
         echo $result;
 
-        if ($result == '08022472173') {
-            echo "phone matcheses";
-        }else {
-            echo "phone do not match";
-        }
 
     }
 

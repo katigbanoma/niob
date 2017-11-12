@@ -22,7 +22,7 @@
             // var_dump($password);
             // exit();
 
-            $loginquery = "SELECT * FROM $tbl_name WHERE username == '$username' and password == '$password'";
+            $loginquery = "SELECT * FROM $tbl_name WHERE username = '$username' and password = '$password'";
             $result = mysqli_query($connection, $loginquery);
     
 

@@ -49,5 +49,7 @@
               $fmsg ="User Registration Failed";
               $_SESSION["not_registered"] = "User Registration Failed";
           }
+      }else{
+          echo "<script>alert('One or more fileds isn't correct or not field'); location.href='index.php';</script>";
       }
      ?>
