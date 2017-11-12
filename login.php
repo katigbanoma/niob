@@ -1,5 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+    <head>
+        <script type="text/javascript">
+            function validateForm() {
+                var x = document.forms["myform"]["username"].value;
+                var y = document.forms["myform"]["mem_password"].value;
+                
+                if (x == "" && y == "") {
+                    alert("UserName must be filled out");
+                    return false;
+                }
+            }
+        </script>
+        <title>
+            Login page
+        </title>
+    </head>
+        
     <body>
         <div id="site-wrapper">
             <div class="main">
@@ -8,7 +25,7 @@
                         <div class="post">
                             <div class="post-title"><h2>Please Enter your login details [New member? Click <a href="#" onclick="showUser('register.php', this.value)">here</a>]</h2></div>
                             <div>
-                                <form action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF']); ?>" id="member_login_form" name="member_login_form" style="contact-form"  method="post">
+                                <form onsubmit="return validateForm()" action="loginprocess.php" id="member_login_form" name="myform" style="contact-form"  method="post">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <input type="text" class="form-control" name="username" id="username" placeholder="Member's Login Username">
@@ -22,11 +39,7 @@
                                         </div>
                                     </div> 
                                 </form>
-                                <?php
-                                    $username = $_POST['username'];
-                                    $mem_password  = $_POST['mem_password'];
-                                    $login = $_POST['login_member'];
-                                ?>
+                                
                             </div>
                         </div>
                     </div>
