@@ -5,6 +5,12 @@
 
     $username = $_SESSION['myusername'];
 
+    if (!$_SESSION['access']) {
+        // do nothing
+    }else{
+        echo "<script>alert('You need to be logged in before you can access the payment portal!'); location.href='administrator.php';</script>";        
+    }
+
     if (!$_SESSION["myusername"]) {
         echo "<script>alert('You need to be logged in before you can access the payment portal!'); location.href='index.php';</script>";
     }else{

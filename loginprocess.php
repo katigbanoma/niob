@@ -3,10 +3,10 @@
 
         require('dbconnect.php');
         
-        $tbl_name = "user";
+        $tbl_name = "users";
 
         $username = $_POST['username'];
-        $password = $_POST['mem_password'];
+        $password = md5($_POST['mem_password']);
         $login = $_POST['login_member'];
 
         
@@ -24,13 +24,23 @@
 
             $loginquery = "SELECT * FROM $tbl_name WHERE username = '$username' and password = '$password'";
             $result = mysqli_query($connection, $loginquery);
-    
 
             $count = mysqli_num_rows($result);
+            $good = mysqli_fetch_assoc($result);
+    
+            $row = $good;
+            $access = $row['access'];
             
     
             if($count==1){
+                    if ($access != 1) {
+                        // do nothing
+                    }else{
+                        $_SESSION['access'] = $access;
+                        $_SESSION["myusername"] = $username;
+                    }
                 $_SESSION["myusername"] = $username;
+                
     
                 echo "<script>alert('Welcome to payments portal ..!! '); location.href='payments.php';</script>";
                 
