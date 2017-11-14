@@ -8,23 +8,16 @@
                         <div class="post">
                             <div class="post-title"><h2><a href="#">Please Enter your personal details</a></h2></div>
                             <div>
-                            <?php 
-                                if (!$_SESSION['registered']) {
-                                    
-                                }else{
-                                    echo $_SESSION['registered'];
-                                }
-                            ?>
-                                <form action="process.php" id="member_reg_form" name="member_reg_form" class="contact-form" role="form" method="post">
+                            <form action="process.php" id="member_reg_form" name="member_reg_form" class="contact-form" role="form" method="post">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <input type="text" class="form-control2" name="surname" id="surname" placeholder="Member's Surname">
+                                            <input type="text" class="form-control2" name="surname" id="surname" placeholder="Member's Surname" required>
                                         </div>
                                         <div class="col-md-12">
-                                            <input type="text" class="form-control2" name="other_names" id="other_names" placeholder="Member's Other Names">
+                                            <input type="text" class="form-control2" name="other_names" id="other_names" placeholder="Member's Other Names" required>
                                         </div>
                                         <div class="col-md-6" style="float:left; width: 39%;">
-                                            <select class="form-control3" name="member_title" id="member_title" placeholder="Member's Title">
+                                            <select class="form-control3" name="member_title" id="member_title" placeholder="Member's Title" required>
                                                 <option value='#'>::: Please Select  Personal Title :::</option>
                                                 <option value='Alhaji'  >Alhaji </option>
                                                 <option value='Bldr.'  >Bldr. </option>
@@ -42,20 +35,20 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6" style="float:left; width: 40%; margin-left: -9px;">
-                                            <select class="form-control3" name="gender" id="gender" placeholder="Member's Gender">
+                                            <select class="form-control3" name="gender" id="gender" placeholder="Member's Gender" required>
                                                 <option value="#"> Please select Gender</option>
                                                 <option value="Male"> Male</option>
                                                 <option value="Female"> Female</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6" style="float:left; width: 35%;">
-                                            <input type="text" class="form-control2" name="dob" id="dob" placeholder="Date of Birth">
+                                            <input type="text" class="form-control2" name="dob" id="dob" placeholder="Date of Birth" required>
                                         </div>
                                         <div class="col-md-6" style="float:left; width: 36%; margin-left: 37px;">
-                                            <input type="text" class="form-control2" name="phone" id="phone" placeholder="Member's Phone Number">
+                                            <input type="text" class="form-control2" name="phone" id="phone" placeholder="Member's Phone Number" required>
                                         </div>
                                         <div class="col-md-6" style="float:left; width: 40%;">
-                                            <select class="form-control2" name="religion" id="religion" placeholder="Member's Religion">
+                                            <select class="form-control2" name="religion" id="religion" placeholder="Member's Religion" required>
                                                 <option value="#"> Religion</option>
                                                 <option value="Islamic"> Islamic</option>
                                                 <option value="Christianity"> Christianity</option>
@@ -63,37 +56,37 @@
                                             </select>
                                         </div>
                                          <div class="col-md-6" style="float:left; width: 40%; margin-left: -20px;">
-                                            <select class="form-control2"  name="niob_membership_grade" id="niob_membership_grade">
+                                            <select class="form-control2"  name="niob_membership_grade" id="niob_membership_grade" required>
                                                 <option value='#'>::: Please Select  NIOB Membership Grade Title :::</option><option value='Fellow'  >Fellow </option><option value='Corporate'  >Corporate </option><option value='Graduate'  >Graduate </option><option value='Associate'  >Associate </option><option value='Licentiate'  >Licentiate </option><option value='Technician'  >Technician </option><option value='Student'  >Student </option><option value='Craftmen And Artisans'  >Craftmen And Artisans </option>                    </select>
                                         </div>  
                                         <div class="col-md-6">
-                                            <input type="email" class="form-control2" name="email" id="email" placeholder="Member's Email Address">
+                                            <input type="email" class="form-control2" name="email" id="email" placeholder="Member's Email Address" required>
                                         </div>      
                                         <div class="col-md-12">
-                                            <input type="text" class="form-control2" name="address" id="address" placeholder="Member's Contact Address">
+                                            <input type="text" class="form-control2" name="address" id="address" placeholder="Member's Contact Address" required>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control2" name="niob_admission_date" id="niob_admission_date" placeholder="Member's NIOB Admission Date">
+                                            <input type="text" class="form-control2" name="niob_admission_date" id="niob_admission_date" placeholder="Member's NIOB Admission Date" required>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control2" name="reg_no" id="reg_no" placeholder="Registration Number">
+                                            <input type="text" class="form-control2" name="reg_no" id="reg_no" placeholder="Registration Number" required>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control2" name="membership_no" id="membership_no" placeholder="Membership Number">
+                                            <input type="text" class="form-control2" name="membership_no" id="membership_no" placeholder="Membership Number" required>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control2" name="corbon_admin_no" id="corbon_admin_no" placeholder="Corbon Admission Number">
+                                            <input type="text" class="form-control2" name="corbon_admin_no" id="corbon_admin_no" placeholder="Corbon Admission Number" required>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control2" name="corbon_admin_date" id="corbon_admin_date" placeholder="Corbon Date of Admission">
+                                            <input type="text" class="form-control2" name="corbon_admin_date" id="corbon_admin_date" placeholder="Corbon Date of Admission" required>
                                         </div> 
                                         <div class="col-md-6" style="float:left; width: 40%;">
-                                            <select class="form-control2"   name="highest_acad_qual" id="highest_acad_qual" placeholder="Highest Academic Qualification">
+                                            <select class="form-control2"   name="highest_acad_qual" id="highest_acad_qual" placeholder="Highest Academic Qualification" required>
                                                 <option value='#'>::: Please Select  Academic Qualification :::</option><option value='Bsc/Btech'  >Bsc/Btech </option><option value='HND'  >HND </option><option value='Msc'  >Msc </option><option value='NCE'  >NCE </option><option value='OND'  >OND </option><option value='PGD'  >PGD </option><option value='Phd'  >Phd </option><option value='WASCE'  >WASCE </option>                    </select>
                                         </div>
                                         <div class="col-md-6" style="float:left; width: 40%; margin-left: -20px;">
-                                            <select class="form-control2"   name="year_education" id="highest_acad_qual" placeholder="Highest Academic Qualification">
+                                            <select class="form-control2"   name="year_education" id="highest_acad_qual" placeholder="Highest Academic Qualification" required>
                                                 <option value='#'>:::Qualification Year :::</option>
                                                 <option value='Bsc/Btech'  >1981</option>
                                                 <option value='HND'  >1982 </option>
@@ -106,14 +99,14 @@
                                             </select>
                                         </div>
                                         <div class="col-md-12">
-                                            <input type="text" class="form-control2" name="current_employer" id="current_employer" placeholder="Current Employer">
+                                            <input type="text" class="form-control2" name="current_employer" id="current_employer" placeholder="Current Employer" required>
                                         </div>
                                         <div class="col-md-12">
-                                            <input type="text" class="form-control2" name="position_held" id="position_held" placeholder="Position Held">
+                                            <input type="text" class="form-control2" name="position_held" id="position_held" placeholder="Position Held" required>
                                         </div>
 
                                         <div class="col-md-12">
-                                            <textarea class="form-control2" name="additional_info" id="additional_info" placeholder="Additional Information" rows="7"></textarea>
+                                            <textarea class="form-control2" name="additional_info" id="additional_info" placeholder="Additional Information" rows="7" required></textarea>
                                         </div>
                                         <div id="upload" class="plupload_button col-md-6" ><a class="btn btn-primary" href="#" style="background-color: #eee !important;  border: 1px solid #CCC !important; color:#000 !important"><i class="fa fa-upload"></i> &nbsp; Upload Passport Photograph</a></div>&nbsp;
                                         <span id="status" ></span>

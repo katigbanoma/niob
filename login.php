@@ -28,10 +28,10 @@
                                 <form onsubmit="return validateForm()" action="loginprocess.php" id="member_login_form" name="myform" style="contact-form"  method="post">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <input type="text" class="form-control" name="username" id="username" placeholder="Member's Login Username">
+                                            <input type="text" class="form-control" name="username" id="username" placeholder="Member's Login Username" required>
                                         </div>
                                         <div class="col-md-12">
-                                            <input type="password" class="form-control" name="mem_password" id="mem_password" placeholder="Member's Login Password">
+                                            <input type="password" class="form-control" name="mem_password" id="mem_password" placeholder="Member's Login Password" required>
                                         </div>
                                         <div class="col-md-6">
                                             <button type="submit" id="login_member" name="login_member" class="btn btn-large btn-effect"><i class="fa fa-check"></i> Login </button>

@@ -23,7 +23,7 @@
           $corbon_admin_no = $_POST['corbon_admin_no'];
           $corbon_admin_date = $_POST['corbon_admin_date'];
           $highest_acad_qual = $_POST['highest_acad_qual'];
-          $education_year = $_POST['education_year'];
+          $education_year = $_POST['year_education'];
           $current_employer = $_POST['current_employer'];
           $position_held = $_POST['position_held'];
           $additional_info = $_POST['additional_info'];
@@ -41,7 +41,8 @@
            )";
           $result = mysqli_query($connection, $query);
           if($result){
-              echo "<script>alert('User Registered Successfully!'); location.href='payments.php';</script>";
+              $_SESSION['member_registration_number'] = $reg_no;
+              echo "<script>alert('User Registered Successfully!'); location.href='makeusername.php';</script>";
               //$smsg = "User Created Successfully.";
               //$_SESSION["registered"] = "User Created Successfully";
               //header('Location: ' . $_SERVER['HTTP_REFERER']);
