@@ -8,7 +8,7 @@
                         <div class="post">
                             <div class="post-title"><h2><a href="#">Please Enter your personal details</a></h2></div>
                             <div>
-                            <form action="process.php" id="member_reg_form" name="member_reg_form" class="contact-form" role="form" method="post">
+                            <form action="process.php" id="member_reg_form" name="member_reg_form" class="contact-form" role="form" method="post" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <input type="text" class="form-control2" name="surname" id="surname" placeholder="Member's Surname" required>

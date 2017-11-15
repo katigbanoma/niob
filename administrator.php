@@ -7,3 +7,9 @@
     }else {
         echo "Welcome Admin -> " . $username;
     }
+
+
+    ?>
+    <br><br>
+    To
+    Log out <a href="logout.php">Click here</a>

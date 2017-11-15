@@ -27,8 +27,15 @@
           $current_employer = $_POST['current_employer'];
           $position_held = $_POST['position_held'];
           $additional_info = $_POST['additional_info'];
-          $passport = $_POST['passport'];
           $save_member = $_POST['save_member'];
+        
+        //  to get the file upload 
+        //check if it is uploaded 
+        // check for size
+        //check for extensions
+        //upload to db its url path
+        // drop to a directory in root of folder
+        $_FILES['passport'];
    
           $query = "INSERT INTO `niob_info` (member_surname, member_othernames, member_personal_title, member_gender, member_date_of_birth, member_religion, 
           member_phone_no, member_email_address, member_contact_address, member_niob_admission_date, member_niob_grade_title, member_registration_number,
