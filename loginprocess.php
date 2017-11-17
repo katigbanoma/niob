@@ -1,57 +1,46 @@
 <?php
-        session_start();
+session_start();
 
-        require('dbconnect.php');
-        
-        $tbl_name = "users";
+require('dbconnect.php');
 
-        $username = $_POST['username'];
-        $password = md5($_POST['mem_password']);
-        $login = $_POST['login_member'];
+$tbl_name = "users";
 
-        
+if (isset($_POST['password']) && isset($_POST['username'])) {
 
-        if ( isset($_POST['login_member']) && isset($_POST['mem_password']) && isset($_POST['username']) ) {
-            
-            $username = stripslashes($username);
-            $password = stripslashes($password);
+    $username = stripslashes($_POST['username']);
+    $password = stripslashes($_POST['password']);
+    $hashedPassword = md5($password);
 
-            // $username = mysql_real_escape_string($username);
-            // $password = mysql_real_escape_string($password);
+    $loginQuery = "SELECT * FROM $tbl_name WHERE username = '$username' AND password = '$hashedPassword'";
+    $result = mysqli_query($connection, $loginQuery);
 
-            // var_dump($password);
-            // exit();
+    $count = mysqli_num_rows($result);
 
-            $loginquery = "SELECT * FROM $tbl_name WHERE username = '$username' and password = '$password'";
-            $result = mysqli_query($connection, $loginquery);
+    if ($count == 1) {
+        $row = mysqli_fetch_assoc($result);
 
-            $count = mysqli_num_rows($result);
-            $good = mysqli_fetch_assoc($result);
-    
-            $row = $good;
-            $access = $row['access'];
-            
-    
-            if($count==1){
-                    if ($access != 1) {
-                        // do nothing
-                    }else{
-                        $_SESSION['access'] = $access;
-                        $_SESSION["myusername"] = $username;
-                    }
-                $_SESSION["myusername"] = $username;
-                
-    
-                echo "<script>alert('Welcome to payments portal ..!! '); location.href='payments.php';</script>";
-                
-                // header("location:payments.php");
-                }
-                else {
-                // header("location:main.php");
-                
-                echo "<script>alert('Unable to login username or password incorrect!'); location.href='index.php';</script>";
-                }
+        if (!$row) {
+            echo "<script>alert('Invalid user account'); location.href='index.php';</script>";
+            die();
         }
-        
 
-     ?>
+        $user = (object)$row;
+        $_SESSION["user"] = $user->username;
+
+        if ($user->is_admin) {
+            echo "<script>alert('Welcome admin'); location.href='admin/html/index.html';</script>";
+            die();
+        }
+
+        echo "<script>alert('Welcome to payments portal ..!! '); location.href='paymentPage.php';</script>";
+        die();
+    } else {
+        echo "<script>alert(
+          'Invalid username/password combination'
+        ); location.href='index.php';</script>";
+        die();
+    }
+}
+
+
+?>

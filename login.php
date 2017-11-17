@@ -13,8 +13,10 @@
             }
         </script>
         <title>
-            Login page
+            NIOB | Login
         </title>
+        <link rel="stylesheet" type="text/css" href="static/sweetalert2.min.css" />
+        <link rel="stylesheet" type="text/css" href="static/style.css" media="screen"/>
     </head>
         
     <body>
@@ -31,10 +33,11 @@
                                             <input type="text" class="form-control" name="username" id="username" placeholder="Member's Login Username" required>
                                         </div>
                                         <div class="col-md-12">
-                                            <input type="password" class="form-control" name="mem_password" id="mem_password" placeholder="Member's Login Password" required>
+                                            <input type="password" class="form-control" name="password" id="password" placeholder="Member's Login Password" required>
                                         </div>
                                         <div class="col-md-6">
-                                            <button type="submit" id="login_member" name="login_member" class="btn btn-large btn-effect"><i class="fa fa-check"></i> Login </button>
+                                            <br>
+                                            <button type="submit" class="btn btn-large btn-effect"><i class="fa fa-check"></i> Login </button>
                                             <div id="success"></div>
                                         </div>
                                     </div> 
