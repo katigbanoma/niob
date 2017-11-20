@@ -10,12 +10,12 @@
     <meta name="keywords" content=""/>
     <meta name="author" content=""/>
     <link rel="stylesheet" type="text/css" href="static/sweetalert2.min.css"/>
-    <link rel="stylesheet" type="text/css" href="static/style.css" media="screen"/>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css"/>
+    <link rel="stylesheet" type="text/css" href="static/style.css" media="screen"/>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -322,5 +322,25 @@
         <div class="clearer">&nbsp;</div>
     </div>
 </div>
+<script>
+    $('.form .stages label').click(function() {
+        var radioButtons = $('.form input:radio');
+        var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
+        selectedIndex = selectedIndex + 1;
+    });
+
+    $('.form button').click(function() {
+        var radioButtons = $('.form input:radio');
+        var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
+
+        selectedIndex = selectedIndex + 2;
+
+        $('.form input[type="radio"]:nth-of-type(' + selectedIndex + ')').prop('checked', true);
+
+        if (selectedIndex == 6) {
+            $('button').html('Submit');
+        }
+    });
+</script>
 </body>
 </html>
