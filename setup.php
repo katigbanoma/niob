@@ -6,7 +6,7 @@
  * Time: 6:10 PM
  */
 //$pdo = new PDO('mysql:dbname=lagosnio_niob;host=localhost;user=root;password=');
-$pdo = new PDO('mysql:dbname=lagosnio_niob;host=localhost;user=lagosnio_admin;password=UpR}8cl-u$wb');
+    $pdo = new PDO('mysql:dbname=lagosnio_niob;host=localhost;user=lagosnio_admin;password=UpR}8cl-u$wb');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
