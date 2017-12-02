@@ -1,7 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
-<head></head>
+<head>
+    <style>
+        .form-control {
+            width: 100% !important;
+        }
+    </style>
+</head>
 <body>
 <div id="site-wrapper">
     <div class="main">
@@ -42,8 +48,8 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-4">
-                                    <input type="tel" class="form-control" name="phone" id="phone"
-                                           placeholder="Member's Phone Number" required>
+                                    <label for="phone"></label>
+                                    <input type="text" pattern="+{3}[-][0-9]{10}" class="form-control" name="phone" id="phone" placeholder="+234-" required />
                                 </div>
                                 <div class="form-group col-md-4">
                                     <input type="email" class="form-control" name="email" id="email"

@@ -21,23 +21,6 @@
         <link rel="stylesheet" type="text/css" href="static/sweetalert2.min.css"/>
         <link rel="stylesheet" type="text/css" href="static/style.css" media="screen"/>
         
-        <!-- multi page form -->
-        <script
-            src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script>
-        <script
-            src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script>
-        <script
-            src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script>
-        <meta charset='UTF-8'>
-        <meta name="robots" content="noindex">
-        <link rel="shortcut icon" type="image/x-icon"
-              href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico"/>
-        <link rel="mask-icon" type=""
-              href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg"
-              color="#111"/>
-        <link rel="canonical" href="https://codepen.io/designify-me/pen/qrJWpG"/>
-        <!-- -->
-        
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css"/>
@@ -115,7 +98,7 @@
                         return elem.name == selection;
                     });
                     $('#amount').val(parseFloat(res.price));
-                    $('#amount').prop('disabled', true);
+                    $('#amount').prop('readonly', true);
                 });
 
                 $('form').on('submit', function (e) {
@@ -419,7 +402,7 @@
                     <div class="section-title">Payment Information</div>
                     <div class="section-content">
                         <div class="post">
-                            <form method="post" action="processPayment.php">
+                            <form method="post" action="processPayment.php" id="paymentForm">
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <select name="paymentStatus" id="paymentStatus" class="form-control" required>
@@ -430,7 +413,7 @@
                                     </div>
                                     <div id="noFields">
                                         <div class="form-group col-md-12">
-                                            <input type="number" class="form-control" name="phone" id="phone" placeholder="Enter Phone Number">
+                                            <input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter Phone Number">
                                         </div>
                                         <div class="form-group col-md-12">
                                             <input type="email" class="form-control" name="username" id="username" placeholder="Enter Email Address">
@@ -469,9 +452,10 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div id="hiddenAmount"></div>
                                     <div id="amountFields">
                                         <div class="form-group col-md-12">
-                                            <input type="hidden" id="hiddenAmount"/>
+                                            <label for="amount"></label>
                                             <input type="number" class="form-control" name="amount" id="amount" value="0.0" required>
                                         </div>
                                     </div>
@@ -543,17 +527,12 @@
                 </div>
 
             </div>
-
             <div class="clearer">&nbsp;</div>
-
         </div>
 
         <div id="footer">
-
             <div class="left" id="footer-left">
-
                 <p>&copy; 2017 NIOB - Lagos Chapter. All rights Reserved</p>
-
                 <div class="clearer">&nbsp;</div>
 
             </div>
@@ -567,91 +546,10 @@
             <div class="clearer">&nbsp;</div>
         </div>
     </div>
-        <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
-        <script>
-            //jQuery time
-            var current_fs, next_fs, previous_fs; //fieldsets
-            var left, opacity, scale; //fieldset properties which we will animate
-            var animating; //flag to prevent quick multi-click glitches
-
-            $(".next1").click(function () {
-                if (animating) return false;
-                animating = true;
-
-                current_fs = $(this).parent();
-                next_fs = $(this).parent().next();
-
-                //activate next step on progressbar using the index of next_fs
-                $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-
-                //show the next fieldset
-                next_fs.show();
-                //hide the current fieldset with style
-                current_fs.animate({opacity: 0}, {
-                    step: function (now, mx) {
-                        //as the opacity of current_fs reduces to 0 - stored in "now"
-                        //1. scale current_fs down to 80%
-                        scale = 1 - (1 - now) * 0.2;
-                        //2. bring next_fs from the right(50%)
-                        left = (now * 50) + "%";
-                        //3. increase opacity of next_fs to 1 as it moves in
-                        opacity = 1 - now;
-                        current_fs.css({
-                            'transform': 'scale(' + scale + ')',
-                            'position': 'absolute'
-                        });
-                        next_fs.css({'left': left, 'opacity': opacity});
-                    },
-                    duration: 800,
-                    complete: function () {
-                        current_fs.hide();
-                        animating = false;
-                    },
-                    //this comes from the custom easing plugin
-                    easing: 'easeInOutBack'
-                });
-            });
-
-            $(".previous").click(function () {
-                if (animating) return false;
-                animating = true;
-
-                current_fs = $(this).parent();
-                previous_fs = $(this).parent().prev();
-
-                //de-activate current step on progressbar
-                $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-
-                //show the previous fieldset
-                previous_fs.show();
-                //hide the current fieldset with style
-                current_fs.animate({opacity: 0}, {
-                    step: function (now, mx) {
-                        //as the opacity of current_fs reduces to 0 - stored in "now"
-                        //1. scale previous_fs from 80% to 100%
-                        scale = 0.8 + (1 - now) * 0.2;
-                        //2. take current_fs to the right(50%) - from 0%
-                        left = ((1 - now) * 50) + "%";
-                        //3. increase opacity of previous_fs to 1 as it moves in
-                        opacity = 1 - now;
-                        current_fs.css({'left': left});
-                        previous_fs.css({'transform': 'scale(' + scale + ')', 'opacity': opacity});
-                    },
-                    duration: 800,
-                    complete: function () {
-                        current_fs.hide();
-                        animating = false;
-                    },
-                    //this comes from the custom easing plugin
-                    easing: 'easeInOutBack'
-                });
-            });
-
-            $(".submit").click(function () {
-                return false;
-            })
-            //# sourceURL=pen.js
-        </script>
+    <script>
+        <?php if (isset($_SESSION['message'])) { ?>
+            alert('<?php echo $_SESSION['message']['data']; unset($_SESSION['message']);  ?>');
+        <?php }?>
+    </script>
     </body>
 </html>

@@ -26,7 +26,7 @@ if (isset($_POST['surname']) && isset($_POST['other_names']) && isset($_POST['me
     $address = $_POST['address'];
     $niob_addmission_date = date('m/d/y', strtotime($_POST['niob_admission_date']));
     $niob_membership_grade = $_POST['niob_membership_grade'];
-    $reg_no = $_POST['reg_no'];
+    $reg_no = 'R00'. stripslashes($_POST['reg_no']);
     $membership_no = $_POST['membership_no'];
     $corbon_admin_no = $_POST['corbon_admin_no'];
     $corbon_admin_date = date('m/d/y', strtotime($_POST['corbon_admin_date']));

@@ -13,7 +13,6 @@ if (isset($_POST['password']) && isset($_POST['username'])) {
 
     $loginQuery = "SELECT * FROM $tbl_name WHERE username = '$username' AND password = '$hashedPassword'";
     $result = mysqli_query($connection, $loginQuery);
-
     $count = mysqli_num_rows($result);
 
     if ($count == 1) {
@@ -28,9 +27,19 @@ if (isset($_POST['password']) && isset($_POST['username'])) {
         $_SESSION["user"] = $user->username;
 
         if ($user->is_admin) {
-            echo "<script>alert('Welcome admin'); location.href='admin/html/index.html';</script>";
+            echo "<script>alert('Welcome admin'); location.href='admin/index.php';</script>";
             die();
         }
+
+        $infoQ = mysqli_query($connection, "SELECT * FROM niob_info WHERE username = '$user->username'");
+        $account = mysqli_fetch_assoc($infoQ);
+
+        if (!$account) {
+            echo "<script>alert('Update Your Account Information'); location.href='user/profile.php';</script>";
+            die();
+        }
+        
+        $_SESSION['account'] = $account;
 
         echo "<script>alert('Welcome to payments portal ..!! '); location.href='paymentPage.php';</script>";
         die();

@@ -30,10 +30,10 @@
                                 <form onsubmit="return validateForm()" action="loginprocess.php" id="member_login_form" name="myform" style="contact-form"  method="post">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <input type="text" class="form-control" name="username" id="username" placeholder="Member's Login Username" required>
+                                            <input type="text" class="form-control form-control-line" name="username" id="username" placeholder="Member's Login Username" required>
                                         </div>
                                         <div class="col-md-12">
-                                            <input type="password" class="form-control" name="password" id="password" placeholder="Member's Login Password" required>
+                                            <input type="password" class="form-control form-control-line" name="password" id="password" placeholder="Member's Login Password" required>
                                         </div>
                                         <div class="col-md-6">
                                             <br>
