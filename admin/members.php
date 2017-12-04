@@ -1,6 +1,6 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,6 +29,7 @@
     <title>NIOB Admin</title>
     <!-- Bootstrap Core CSS -->
     <link href="../static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
     <!-- Menu CSS -->
     <link href="../static/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
     <!-- toast CSS -->
@@ -104,6 +105,9 @@
                     <a href="paymentTypes.php" class="waves-effect"><i class="fa fa-credit-card fa-fw" aria-hidden="true"></i>Payment Types</a>
                 </li>
                 <li>
+                    <a href="grades.php" class="waves-effect"><i class="fa fa-graduation-cap fa-fw" aria-hidden="true"></i>Cadres</a>
+                </li>
+                <li>
                     <a href="members.php" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Members</a>
                 </li>
             </ul>
@@ -133,7 +137,6 @@
                         <!--                        <p class="text-muted">Recent transactions</p>-->
                         <div class="table-responsive">
                             <?php
-                            session_start();
                             require('../dbconnect.php');
 
                             $query = "SELECT * FROM `niob_info`";
@@ -143,7 +146,7 @@
                                 $results_array[] = $row;
                             }
                             if (count($results_array) > 0) { ?>
-                            <table class="table">
+                            <table id="members" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
                                     <th class="font-bold">Surname</th>
@@ -162,8 +165,7 @@
                                 foreach ($results_array as $arr) { ?>
                                     <tr>
                                         <td><?php echo $arr['surname'] ?></td>
-                                        <td><?php echo $arr['othernames'] ?></td>
-                                        <td><?php echo $arr['title'] ?></td>
+                                        <td><?php echo $arr['other_names'] ?></td>
                                         <td><?php echo $arr['title'] ?></td>
                                         <td><?php echo $arr['gender'] ?></td>
                                         <td><?php echo $arr['religion'] ?></td>
@@ -171,7 +173,7 @@
                                         <td><?php echo $arr['email'] ?></td>
                                         <td><?php echo $arr['address'] ?></td>
                                         <td>
-                                            <a href="member_info.php">Edit Information</a>
+                                            <a href="#" onclick="edit(<?php echo $arr['id'] ?>)">Edit Information</a>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -196,6 +198,8 @@
 <script src="../static/plugins/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="../static/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <!-- Menu Plugin JavaScript -->
 <script src="../static/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
 <!--slimscroll JavaScript -->
@@ -204,6 +208,18 @@
 <script src="../static/js/waves.js"></script>
 <!-- Custom Theme JavaScript -->
 <script src="../static/js/custom.min.js"></script>
+<script>
+    function edit(id) {
+        location.href = 'member_info.php?id=' + id;
+    }
+
+    $(function () {
+        $('#members').DataTable();
+        <?php if (isset($_SESSION['message'])) { ?>
+        alert('<?php $msg = $_SESSION['message']['data'];  echo $msg; unset($_SESSION['message']);?>');
+        <?php } ?>
+    });
+</script>
 </body>
 
 </html>

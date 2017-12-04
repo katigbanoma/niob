@@ -105,7 +105,6 @@
 
                     $(this).submit(function() {
                         e.preventDefault();
-                        console.log($('form').serialize());
                         return false;
                     });
                     return true;
@@ -349,7 +348,7 @@
                     <li><a href="#" onclick="showUser('executives.html', this.value)">EXECUTIVES</a></li>
                     <?php
                     if (isset($_SESSION['user'])) { ?>
-                        <li><a href="#" onclick="showUser('membership.html', this.value)">MEMBERSHIPS</a></li>
+                        <li><a href="user/profile.php">MEMBERSHIPS</a></li>
                     <?php } else { ?>
                         <li><a href="#" onclick="showUser('login.php', this.value)">MEMBERSHIPS</a></li>
                     <?php } ?>
@@ -425,9 +424,9 @@
                                     <div id="yesFields">
                                         <div class="form-group col-md-12">
                                             <div class="input-group mb-2 mb-sm-0">
-                                                <div class="input-group-addon">R00</div>
-                                                <input type="text" class="form-control" id="reg_no" name="reg_no" placeholder="Registration Number">
-                                            </div>
+                                                <div class="input-group-addon">F</div>
+                                                <input type="text" class="form-control" id="reg_no" name="reg_no" placeholder="Corbon Number">
+                                            </div>  
                                         </div>
                                     </div>
                                     <div id="paymentFields">

@@ -248,6 +248,11 @@
     <script src="../static/js/waves.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="../static/js/custom.min.js"></script>
+    <script>
+        <?php session_start(); if (isset($_SESSION['message'])) { ?>
+        alert('<?php $msg = $_SESSION['message']['data'];  echo $msg; unset($_SESSION['message']);?>');
+        <?php } ?>
+    </script>
 </body>
 
 </html>

@@ -29,6 +29,7 @@
     <title>NIOB Admin</title>
     <!-- Bootstrap Core CSS -->
     <link href="../static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
     <!-- Menu CSS -->
     <link href="../static/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
     <!-- toast CSS -->
@@ -98,6 +99,9 @@
                     <a href="paymentTypes.php" class="waves-effect"><i class="fa fa-credit-card fa-fw" aria-hidden="true"></i>Payment Types</a>
                 </li>
                 <li class="active">
+                    <a href="grades.php" class="waves-effect"><i class="fa fa-graduation-cap fa-fw" aria-hidden="true"></i>Cadres</a>
+                </li>
+                <li>
                     <a href="members.php" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Members</a>
                 </li>
             </ul>
@@ -113,7 +117,7 @@
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Grades</h4>
+                    <h4 class="page-title">Cadres</h4>
                 </div>
                 <div class="col-lg-9 col-md-8 col-sm-8">
                     <h6 class="caption" style="float: right"><a href="../logout.php">Sign Out</a></h6>
@@ -126,21 +130,18 @@
                         <div class="table-responsive">
                             <?php
                             require('../dbconnect.php');
-                            if(!isset($_GET['code']) || empty($_GET['code'])) {
-                                header("Location: paymentTypes.php");
-                            };
-                            $code = $_GET['code'];
-                            $query = "SELECT * FROM `grades` WHERE pt_code='$code'";
+                            $query = "SELECT * FROM `cadres`";
                             $results_array = array();
                             $result = mysqli_query($connection, $query);
                             while ($row = $result->fetch_assoc()) {
                                 $results_array[] = $row;
                             };
                             if (count($results_array) > 0) { ?>
-                                <table class="table">
+                                <table id="cadres" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
                                         <th class="font-bold">Name</th>
+                                        <th class="font-bold">Membership Status</th>
                                         <th class="font-bold">Price</th>
                                         <th>#</th>
                                     </tr>
@@ -150,9 +151,10 @@
                                     foreach ($results_array as $arr) { ?>
                                         <tr>
                                             <td><?php echo $arr['name'] ?></td>
+                                            <td><?php echo $arr['class'] ?></td>
                                             <td><?php echo $arr['price'] ?></td>
                                             <td>
-                                                <a href="#" onclick="editGrade('<?php echo $arr['id'] ?>')">Edit Information</a>
+                                                <a href="#" onclick="editGrade('<?php echo $arr['id'] ?>')">Edit</a>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -177,6 +179,8 @@
 <script src="../static/plugins/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="../static/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <!-- Menu Plugin JavaScript -->
 <script src="../static/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
 <!--slimscroll JavaScript -->
@@ -189,6 +193,14 @@
     function editGrade(grade_id) {
         location.href = 'grade_info.php?id=' + grade_id;
     }
+    
+    $(function () {
+        $('#cadres').DataTable();
+        <?php session_start(); if (isset($_SESSION['message'])) { ?>
+        alert('<?php $msg = $_SESSION['message']['data'];  echo $msg; unset($_SESSION['message']);?>');
+        <?php } ?>
+    });
+
 </script>
 </body>
 

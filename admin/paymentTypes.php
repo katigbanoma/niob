@@ -1,6 +1,6 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,6 +29,7 @@
     <title>NIOB Admin</title>
     <!-- Bootstrap Core CSS -->
     <link href="../static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
     <!-- Menu CSS -->
     <link href="../static/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
     <!-- toast CSS -->
@@ -103,6 +104,9 @@
                     <a href="paymentTypes.php" class="waves-effect"><i class="fa fa-credit-card fa-fw" aria-hidden="true"></i>Payment Types</a>
                 </li>
                 <li>
+                    <a href="grades.php" class="waves-effect"><i class="fa fa-graduation-cap fa-fw" aria-hidden="true"></i>Cadres</a>
+                </li>
+                <li>
                     <a href="members.php" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Members</a>
                 </li>
             </ul>
@@ -141,7 +145,7 @@
                                 $results_array[] = $row;
                             }
                             if (count($results_array) > 0) { ?>
-                            <table class="table">
+                            <table id="data" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
                                     <th class="font-bold">Name</th>
@@ -157,7 +161,7 @@
                                         <td><?php echo $arr['name'] ?></td>
                                         <td><?php echo $arr['code'] ?></td>
 <!--                                        <td>--><?php //echo $arr['price'] ?><!--</td>-->
-                                        <td><a href="#" onclick="loadGrades('<?php echo $arr['code']; ?>')">Grades</a> | <a href="type_info.php">Edit</a></td>
+                                        <td><a href="#" onclick="edit('<?php echo $arr['id']; ?>')">Edit</a></td>
                                     </tr>
                                 <?php }  ?>
                                 </tbody>
@@ -181,6 +185,8 @@
 <script src="../static/plugins/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="../static/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <!-- Menu Plugin JavaScript -->
 <script src="../static/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
 <!--slimscroll JavaScript -->
@@ -190,9 +196,17 @@
 <!-- Custom Theme JavaScript -->
 <script src="../static/js/custom.min.js"></script>
 <script>
-    function loadGrades(code) {
-        location.href = 'grades.php?code=' + code;
+    function edit(id) {
+        location.href = 'type_info.php?id=' + id;
     }
+    
+    $(function () {
+        $('#data').DataTable();
+        
+        <?php if (isset($_SESSION['message'])) { ?>
+        alert('<?php $msg = $_SESSION['message']['data'];  echo $msg; unset($_SESSION['message']);?>');
+        <?php } ?>
+    });
 </script>
 </body>
 

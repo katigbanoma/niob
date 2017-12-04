@@ -57,7 +57,7 @@ if (isset($_POST['paymentStatus']) && isset($_POST['paymentType'])) {
     }
 
     else {
-        $reg_no ='R00'. stripslashes($formData['reg_no']);
+        $reg_no ='F'. stripslashes($formData['reg_no']);
         $regQuery = "SELECT * FROM `niob_info` WHERE reg_no = '$reg_no'";
         $result = mysqli_query($connection, $regQuery);
         $row = mysqli_fetch_assoc($result);

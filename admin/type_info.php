@@ -1,16 +1,25 @@
 <?php
     require('../dbconnect.php');
-    if(!isset($_GET['code']) || empty($_GET['code'])) {
+    if(!isset($_GET['id']) || empty($_GET['id'])) {
         header("Location: paymentTypes.php");
     };
-    $code = $_GET['code'];
-    $query = "SELECT * FROM `grades` WHERE pt_code='$code'";
-    $results_array = array();
+
+    $accQuery = mysqli_query($connection, "SELECT * FROM `accounts`");
+    $accounts = array();
+
+    while($accRow = $accQuery->fetch_assoc()) {
+        $accounts[] = $accRow;
+    }
+
+    if (count($accounts) == 0) {
+        header("Location: paymentTypes.php");
+    }
+
+    $id = $_GET['id'];
+    $query = "SELECT * FROM `payment_types` WHERE id='$id'";
     $result = mysqli_query($connection, $query);
-    while ($row = $result->fetch_assoc()) {
-        $results_array[] = $row;
-    };
-    $_SESSION['results'] = $results_array;
+    $row = $result->fetch_assoc();
+    if ($row) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,7 +136,10 @@
                 <li>
                     <a href="paymentTypes.php" class="waves-effect"><i class="fa fa-credit-card fa-fw" aria-hidden="true"></i>Payment Types</a>
                 </li>
-                <li class="active">
+                <li>
+                    <a href="grades.php" class="waves-effect"><i class="fa fa-graduation-cap fa-fw" aria-hidden="true"></i>Cadres</a>
+                </li>
+                <li>
                     <a href="members.php" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Members</a>
                 </li>
             </ul>
@@ -161,48 +173,28 @@
             <div class="row">
                 <div class="col-md-12 col-xs-12">
                     <div class="white-box">
-                        <form class="form-horizontal form-material">
+                        <form class="form-horizontal form-material" method="post" action="update_type.php">
                             <div class="form-group">
-                                <label class="col-md-12">Full Name</label>
+                                <label class="col-md-12" for="name">Name</label>
                                 <div class="col-md-12">
-                                    <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="example-email" class="col-md-12">Email</label>
-                                <div class="col-md-12">
-                                    <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-12">Password</label>
-                                <div class="col-md-12">
-                                    <input type="password" value="password" class="form-control form-control-line"> </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-12">Phone No</label>
-                                <div class="col-md-12">
-                                    <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-12">Message</label>
-                                <div class="col-md-12">
-                                    <textarea rows="5" class="form-control form-control-line"></textarea>
+                                    <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                                    <input type="text" name="name" id="name" value="<?php echo $row['name'] ?>" class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-12">Select Country</label>
+                                <label for="account_id" class="col-sm-12">Select Country</label>
                                 <div class="col-sm-12">
-                                    <select class="form-control form-control-line">
-                                        <option>London</option>
-                                        <option>India</option>
-                                        <option>Usa</option>
-                                        <option>Canada</option>
-                                        <option>Thailand</option>
+                                    <select name="account_id" id="account_id" class="form-control form-control-line">
+                                        <option value="">Select Account</option>
+                                        <?php foreach ($accounts as $act) { ?>
+                                            <option value="<?php echo $act['id']?>"<?php echo $act['id'] == $row['account_id'] ? 'selected': ''?>><?php echo $act['bank'] ?> | <?php echo $act['account_name'] ?> | <?php echo $act['account_number'] ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-success">Update Profile</button>
+                                    <button class="btn btn-success">Update</button>
                                 </div>
                             </div>
                         </form>
@@ -229,6 +221,13 @@
 <script src="../static/js/waves.js"></script>
 <!-- Custom Theme JavaScript -->
 <script src="../static/js/custom.min.js"></script>
+<script>
+    <?php session_start(); if (isset($_SESSION['message'])) { ?>
+    alert('<?php $msg = $_SESSION['message']['data'];  echo $msg; unset($_SESSION['message']);?>');
+    <?php } ?>
+</script>
 </body>
 
 </html>
+<?php } else { ?>
+<?php header("Location: paymentTypes.php"); } ?>

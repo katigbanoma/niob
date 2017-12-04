@@ -8,7 +8,7 @@
 require('dbconnect.php');
 
 $code = $_POST['code'];
-$query = "SELECT * FROM `grades` WHERE pt_code='$code'";
+$query = "SELECT * FROM `cadres` WHERE class='$code'";
 $results_array = array();
 $result = mysqli_query($connection, $query);
 while ($row = $result->fetch_assoc()) {

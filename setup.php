@@ -25,29 +25,30 @@ array_push($list, $users);
 $info = "CREATE TABLE IF NOT EXISTS niob_info(
   id serial PRIMARY KEY,
   surname varchar (255) NOT NULL,
-  othernames TEXT NOT NULL,
+  other_names TEXT NOT NULL,
   title varchar (255) NOT NULL,
   gender varchar (255) NOT NULL,
   religion varchar (255) NOT NULL,
   phone varchar (255) NOT NULL,
   email varchar (255) NOT NULL,
-  address TEXT NOT NULL,
-  niob_grade_title varchar (255) NOT NULL,
+  address TEXT NULL,
+  membership_cadre varchar (255) NOT NULL,
   member_registration_number varchar (255) NOT NULL,
-  membership_number varchar (255) NOT NULL,
-  corbon_admission_number varchar (255) NOT NULL,
+  niob_admission_date varchar (10) NOT NULL,
+  
+  status VARCHAR (50) NOT NULL,
+  corbon_number varchar (255) NULL,
   dob date DEFAULT NULL,
-  niob_admission_date date DEFAULT NULL,
-  corbon_date_of_admission date DEFAULT NULL,
-  academic_qualification varchar (100) NOT NULL,
-  member_year_of_education varchar (10) NOT NULL,
-  member_current_employer TEXT NOT NULL,
-  member_position_held TEXT NOT NULL,
-  member_additional_infomation TEXT NOT NULL,
-  profile_image TEXT NOT NULL,
+  school TEXT NOT NULL,
+  highest_acad_qual varchar (100) NOT NULL,
+  year_education varchar (10) NOT NULL,
+  current_employer TEXT NOT NULL,
+  position_held TEXT NOT NULL,
+  additional_info TEXT NOT NULL,
+  passport TEXT NOT NULL,
   updated_at date DEFAULT NULL,
   created_at date DEFAULT NULL,
-  FOREIGN KEY (email) REFERENCES users(username)
+  FOREIGN KEY (phone) REFERENCES users(username)
 );";
 
 array_push($list, $info);
@@ -75,9 +76,9 @@ $text = "CREATE TABLE IF NOT EXISTS payment_types(
 
 array_push($list, $text);
 
-$grd = "CREATE TABLE IF NOT EXISTS grades(
-  id serial PRIMARY KEY,
-  pt_code VARCHAR (255) NOT NULL,
+$grd = "CREATE TABLE IF NOT EXISTS cadres(
+  id serial PRIMARY KEY,  
+  class VARCHAR (255) NOT NULL,
   name TEXT NOT NULL,
   price FLOAT DEFAULT 0.0
 );";
@@ -133,41 +134,31 @@ $paymentTypes = array(
         array('name'=>"Licentiate"), array('name'=>'Technician'), array('name'=>'Student'), array('name'=>'Craftmen')
     )),
 
-    array('code'=>'exam_enrol_fees', 'name'=>'Exanmination Enrollment Fees', 'account_id'=>'1',
-        'grades'=>array(array('name'=>'Corporate'), array('name'=>'Graduate'), array('name'=>'Associate'),
-            array('name'=>"Licentiate"), array('name'=>'Technician'), array('name'=>'MCE(ELected Assoc)'))),
+    array('code'=>'annual_dues', 'name'=>'Annual Dues', 'account_id'=>'1'),
 
-    array('code'=>'annual_dues', 'name'=>'Annual Dues', 'account_id'=>'1', 'grades'=>array(array('name'=>'Graduate'))),
+    array('code'=>'late_exam_form', 'name'=>'Late Submission of Exam Form', 'account_id'=>'1'),
+    array('code'=>'interview','name'=>'Interview', 'account_id'=>'1'),
+    array('code'=>'donations', 'name'=>'Donations', 'account_id'=>'1'),
+    array('code'=>'corp_cert', 'name'=>'Corporate Certificate', 'account_id'=>'2'),
+    array('code'=>'arrears_prior_2010', 'name'=>'Arrears Prior 2010', 'account_id'=>'1'),
 
-    array('code'=>'web_dev_levy', 'name'=>'Website Development Levy', 'account_id'=>'1', 'grades'=>array(array('name'=>'Fellow'), array('name'=>'Corporate'), array('name'=>'Graduate'), array('name'=>'Associate'),
-        array('name'=>"Licentiate"), array('name'=>'Technician'), array('name'=>'Craftmen'))),
+    array('code'=>'agm','name'=>'Annual General Meeting', 'account_id'=>'2'),
 
-    array('code'=>'late_exam_form', 'name'=>'Late Submission of Exam Form', 'price'=>0.0, 'account_id'=>'1'),
-    array('code'=>'interview','name'=>'Interview', 'price'=>0.0, 'account_id'=>'1'), array('code'=>'donations', 'name'=>'Donations', 'price'=>0.0, 'account_id'=>'1'),
-    array('code'=>'corp_cert', 'name'=>'Corporate Certificate', 'account_id'=>'2', 'price'=>0.0),
-    array('code'=>'arrears_prior_2010', 'name'=>'Arrears Prior 2010', 'price'=>0.0, 'account_id'=>'1'),
-    array('code'=>'out_mcpdp', 'name'=>'Outstanding MCPDP FOR CORP/FELLOW INTV.', 'price'=>0.0, 'account_id'=>'1'),
-
-    array('code'=>'inv_donation', 'name'=>'Investiture Donation', 'price'=>0.0, 'account_id'=>'1'),
-    array('code'=>'agm','name'=>'Annual General Meeting', 'price'=>0.0, 'account_id'=>'2',
-        'grades'=>array(array('name'=>'Fellow'), array('name'=>'Corporate'), array('name'=>'Graduate'), array('name'=>'Associate'),
-            array('name'=>"Licentiate"), array('name'=>'Technician'), array('name'=>'Student'), array('name'=>'Craftmen'), array('name'=>'MCE(ELected Assoc)'),
-            array('name'=>'Direct Membership'), array('name'=>'MCE(ELected Grad)'), array('name'=>'Hon. Fellow'), array('name'=>'Affiliate'))),
-
-    array('code'=>'sec_levy', 'name'=>'Secretariat Levy', 'price'=>0.0, 'account_id'=>'1'),
-    array('code'=>'proc_fee','name'=>'Processing Fee', 'price'=>0.0, 'account_id'=>'1'),
-    array('code'=>'constitution', 'name'=>'Constitution', 'price'=>0.0, 'account_id'=>'1'),
-    array('code'=>'levies_fees', 'name'=>'Levies/Fees', 'price'=>0.0, 'account_id'=>'1'),
-    array('code'=>'annual_dues_2009', 'name' => 'Annual Dues 2009', 'account_id'=>'1', 'price'=>0.0, 'grades'=>array(array('name'=>'Fellow'))),
-    array('code'=>'annual_dues_2010', 'name' => 'Annual Dues 2010', 'account_id'=>'1', 'price'=>0.0, 'grades'=>array(array('name'=>'Fellow'), array('name'=>'Corporate'))),
-    array('code'=>'annual_dues_2011', 'name' => 'Annual Dues 2011', 'account_id'=>'1', 'price'=>0.0, 'grades'=>array(array('name'=>'Fellow'))),
-    array('code'=>'annual_dues_2012', 'name' => 'Annual Dues 2012', 'account_id'=>'1', 'price'=>0.0, 'grades'=>array(array('name'=>'Fellow'))),
-    array('code'=>'annual_dues_2013', 'name' => 'Annual Dues 2013', 'account_id'=>'1', 'price'=>0.0, 'grades'=>array(array('name'=>'Fellow'))),
-    array('code'=>'annual_dues_2014', 'name' => 'Annual Dues 2014', 'account_id'=>'1', 'price'=>0.0, 'grades'=>array(array('name'=>'Fellow'))),
-        array('code'=>'annual_dues_2015', 'name' => 'Annual Dues 2015', 'price'=>0.0, 'account_id'=>'1', 'grades'=>array(array('name'=>'Fellow'))),
-    array('code'=>'annual_dues_2016', 'name' => 'Annual Dues 2016', 'price'=>0.0, 'account_id'=>'1',
-        'grades'=>array(array('name'=>'Fellow'), array('name'=>'Corporate'), array('name'=>'Graduate'), array('name'=>'Associate'))),
-    array('code'=>'annual_dues_2017', 'name' => 'Annual Dues 2017', 'price'=>0.0, 'account_id'=>'1', 'grades'=>array(array('name'=>'Fellow'))));
+    array('code'=>'workshop', 'name'=>'Workshop', 'account_id'=>'2'),
+    array('code'=>'mentoring', 'name'=>'Mentoring Program', 'account_id'=>'2'),
+    array('code'=>'seminars', 'name'=>'Seminars', 'account_id'=>'2'),
+    array('code'=>'proc_fee','name'=>'Membership Processing Fee', 'account_id'=>'1'),
+    array('code'=>'by-law', 'name'=>'By-law', 'account_id'=>'1'),
+    array('code'=>'levies_fees', 'name'=>'Levies/Fees', 'account_id'=>'1'),
+    array('code'=>'annual_dues_2009', 'name' => 'Annual Dues 2009', 'account_id'=>'1'),
+    array('code'=>'annual_dues_2010', 'name' => 'Annual Dues 2010', 'account_id'=>'1'),
+    array('code'=>'annual_dues_2011', 'name' => 'Annual Dues 2011', 'account_id'=>'1'),
+    array('code'=>'annual_dues_2012', 'name' => 'Annual Dues 2012', 'account_id'=>'1'),
+    array('code'=>'annual_dues_2013', 'name' => 'Annual Dues 2013', 'account_id'=>'1'),
+    array('code'=>'annual_dues_2014', 'name' => 'Annual Dues 2014', 'account_id'=>'1'),
+    array('code'=>'annual_dues_2015', 'name' => 'Annual Dues 2015', 'account_id'=>'1'),
+    array('code'=>'annual_dues_2016', 'name' => 'Annual Dues 2016', 'account_id'=>'1'),
+    array('code'=>'annual_dues_2017', 'name' => 'Annual Dues 2017', 'account_id'=>'1'));
 
 foreach ($paymentTypes as $pt) {
     $code = $pt['code'];
@@ -176,18 +167,33 @@ foreach ($paymentTypes as $pt) {
 
     $det = "INSERT INTO `payment_types` (code , name, account_id) VALUES ('$code', '$name', $acct_id);";
     $obj = $pdo->prepare($det);
-    $resp = $obj->execute();
+    $obj->execute();
 
-    if ($resp == true && array_key_exists('grades', $pt)) {
-        foreach ($pt['grades'] as $gd) {
-            $name = $gd['name'];
-
-            $xet = "INSERT INTO `grades` (pt_code , name) VALUES ('$code', '$name');";
-            $obj = $pdo->prepare($xet);
-            $resp = $obj->execute();
-        }
-    }
+//    if ($resp == true && array_key_exists('grades', $pt)) {
+//        foreach ($pt['grades'] as $gd) {
+//            $name = $gd['name'];
+//
+//            $xet = "INSERT INTO `grades` (pt_code , name) VALUES ('$code', '$name');";
+//            $obj = $pdo->prepare($xet);
+//            $resp = $obj->execute();
+//        }
+//    }
 }
+
+$grades =  array(array('name'=>'Fellow', 'class'=>'registered'), array('name'=>'Corporate', 'class'=>'registered'),
+    array('name'=>'Corporate', 'class'=>'non_registered'),
+    array('name'=>'Graduate', 'class'=>'non_registered'), array('name'=>'Associate', 'class'=>'non_registered'),
+    array('name'=>"Licentiate", 'class'=>'non_registered'), array('name'=>'Technician', 'class'=>'non_registered'),
+    array('name'=>'Student', 'class'=>'non_registered'), array('name'=>'Craftmen', 'class'=>'non_registered'));
+
+foreach ($grades as $gd) {
+    $class = $gd['class'];
+    $nm = $gd['name'];
+    $gte = "INSERT INTO `cadres` (class , name) VALUES ('$class', '$nm');";
+    $obj = $pdo->prepare($gte);
+    $obj->execute();
+}
+
 
 echo 'Complete';
 die();

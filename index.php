@@ -114,7 +114,7 @@
                 <li><a href="#" onclick="showUser('executives.html', this.value)">EXECUTIVES</a></li>
                 <?php
                 if (isset($_SESSION['user'])) { ?>
-                    <li><a href="#" onclick="showUser('membership.html', this.value)">MEMBERSHIPS</a></li>
+                    <li><a href="user/profile.php">MEMBERSHIPS</a></li>
                 <?php } else { ?>
                     <li><a href="#" onclick="showUser('login.php', this.value)">MEMBERSHIPS</a></li>
                 <?php } ?>

@@ -1,4 +1,13 @@
-<?php session_start(); ?>
+<?php session_start();
+
+if (!isset($_SESSION['user'])) {
+    echo "<script>alert(
+          'Log on to access this page!'
+        ); location.href='../index.php';</script>";
+    die();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,9 +102,6 @@
             </div>
             <ul class="nav" id="side-menu">
                 <li style="padding: 70px 0 0;">
-                    <a href="../index.php" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Home</a>
-                </li>
-                <li>
                     <a href="profile.php" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Profile</a>
                 </li>
                 <li>

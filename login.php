@@ -33,7 +33,7 @@
                                             <input type="text" class="form-control form-control-line" name="username" id="username" placeholder="Member's Login Username" required>
                                         </div>
                                         <div class="col-md-12">
-                                            <input type="password" class="form-control form-control-line" name="password" id="password" placeholder="Member's Login Password" required>
+                                            <input type="password" class="form-control form-control-line" name="password" id="password" autocomplete="new-password" placeholder="Member's Login Password" required>
                                         </div>
                                         <div class="col-md-6">
                                             <br>
@@ -42,7 +42,6 @@
                                         </div>
                                     </div> 
                                 </form>
-                                
                             </div>
                         </div>
                     </div>

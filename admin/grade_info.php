@@ -99,7 +99,10 @@
                 <li>
                     <a href="paymentTypes.php" class="waves-effect"><i class="fa fa-credit-card fa-fw" aria-hidden="true"></i>Payment Types</a>
                 </li>
-                <li class="active">
+                <li>
+                    <a href="grades.php" class="waves-effect"><i class="fa fa-graduation-cap fa-fw" aria-hidden="true"></i>Cadres</a>
+                </li>
+                <li>
                     <a href="members.php" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Members</a>
                 </li>
             </ul>
@@ -118,12 +121,12 @@
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Update Payment Type</h4>
+                    <h4 class="page-title">Update Grade</h4>
                 </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <h6 class="caption" style="float: right"><a href="../logout.php">&nbsp;Sign Out</a></h6>
                     <ol class="breadcrumb">
-                        <li><a href="paymentTypes.php">Payment Types</a></li>
+                        <li><a href="grades.php">Cadres</a></li>
                         <li class="active">Update</li> |
                     </ol>
                 </div>
@@ -139,9 +142,9 @@
                                 header("Location: paymentTypes.php");
                             };
                             $id = $_GET['id'];
-                            $query = "SELECT * FROM `grades` WHERE id='$id'";
+                            $query = "SELECT * FROM `cadres` WHERE id='$id'";
                             $result = mysqli_query($connection, $query);
-    
+
                             if (mysqli_num_rows($result) == 1) {
                                 $row = $result->fetch_assoc();
                         ?>
@@ -151,6 +154,15 @@
                                 <div class="col-md-12">
                                     <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
                                     <input type="text" placeholder="Fellow" name="name" class="form-control form-control-line" value="<?php echo $row['name'] ?>" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="class" class="col-md-12">Membership Status</label>
+                                <div class="col-md-12">
+                                    <select name="class" id="class" class="form-control form-control-line">
+                                        <option value="registered"<?php echo $row['class'] == 'registered' ? 'selected': ''?>>Registered</option>
+                                        <option value="non_registered"<?php echo $row['class'] == 'non_registered' ? 'selected': ''?>>Non Registered</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
